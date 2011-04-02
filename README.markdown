@@ -11,6 +11,8 @@ file and folder structure will be copied to your DOCROOT. By
 default Publicize will only be enabled when your application is
 not in Kohana::PRODUCTION.
 
+This module started as a gist: [https://gist.github.com/899531](https://gist.github.com/899531)
+
 ## Requires
 
  - PHP 5.3 +
