@@ -2,7 +2,7 @@
 /**
  * Overwrite or replace in your application directory to alter
  * default behaviour. For example you might like to change the
- * criteria under which Kohana::set_route() is run.
+ * criteria under which [Kohana::set_route()] is run.
  *
  * @package    Publicize
  * @category   Helpers

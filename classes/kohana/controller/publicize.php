@@ -1,7 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
- * Controller for Publicize. Currently only contains a redirect
- * action.
+ * Controller for [Publicize].
  *
  * @package    Publicize
  * @category   Helpers
@@ -10,17 +9,29 @@
  * @license    MIT
  */
 class Kohana_Controller_Publicize extends Controller {
-
+	
 	/**
-	 * Simple redirect action for use by Publicize.
-	 *
+	 * When not in development mode this action will copy the
+	 * file into DOCROOT and redirect the request to the static
+	 * file. However in development mode the file will be served
+	 * by Kohana to allow for faster development.
+	 * 
 	 * @return  void
 	 */
-	public function action_redirect()
+	public function action_copy()
 	{
-		$this->request->redirect(
-			$this->request->param('uri')
-		);
+		$uri = $this->request->param('uri');
+		$asset = $this->request->param('asset');
+	
+		if (Kohana::$environment !== Kohana::DEVELOPMENT)
+		{
+			// Copy and redirect
+			Publicize::copy_to_docroot($uri, $asset);
+			$this->request->redirect($uri);
+		}
+		
+		// Show live copy
+		$this->response->send_file($asset);
 	}
 	
 }

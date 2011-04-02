@@ -6,12 +6,33 @@ are required? Publicize is a tiny module that enables your
 modules to contain static content such as .css and .js files
 inside a folder called `public`.
 
-You can then access these files publically, the first time the
-file and folder structure will be copied to your DOCROOT. By
-default Publicize will only be enabled when your application is
-not in Kohana::PRODUCTION.
+## Environment
 
-This module started as a gist: [https://gist.github.com/899531](https://gist.github.com/899531)
+Dependant on your Kohana::$environment Publicize will act in
+different ways.
+
+### Development
+
+The file will be found and served via Controller_Publicize. This
+will affect the performance of your application however it will
+mean all assets shared by modules will be up to date.
+
+### Testing and Staging
+
+The first load of the file will go via Controller_Publicize
+which will copy the file into DOCROOT, and redirect to that
+static version of the file.
+
+### Production
+
+The route will not be set by default in the production
+environment for performance reasons.
+
+## History
+
+This module started as a [gist][].
+
+[gist]: https://gist.github.com/899531
 
 ## Requires
 
@@ -24,4 +45,6 @@ Luke Morton a.k.a. DrPheltRight
 
 ## License
 
-[http://creativecommons.org/licenses/MIT/](http://creativecommons.org/licenses/MIT/)
+Licensed under [MIT][].
+
+[MIT]: http://creativecommons.org/licenses/MIT/]

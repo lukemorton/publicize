@@ -1,7 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
- * Controller for Publicize. Currently only contains a redirect
- * action.
+ * Controller for [Publicize].
  *
  * @package    Publicize
  * @category   Helpers

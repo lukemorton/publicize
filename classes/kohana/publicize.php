@@ -5,15 +5,6 @@
  * publically available via your htdocs, public, html, www,
  * %%insert another public folder variation%%.
  *
- * When not in production mode going to the URL `css/screen.css`
- * (a file that does not exist in your public directory), the
- * Kohana Cascading File System will be searched for this path
- * within a folder called `public`, if found it is copied to the
- * public directory.
- *
- * In order to update the file you do need to delete it from
- * your public directory.
- *
  * @package    Publicize
  * @category   Helpers
  * @author     Luke Morton
@@ -49,7 +40,7 @@ class Kohana_Publicize {
 	}
 
 	/**
-	 * Route callback, contains the copying functionality.
+	 * Route callback sends request to [Controller_Publicize].
 	 *
 	 * @param   string  URI to search for
 	 * @return  array   Params for Controler_Publicize::action_redirect()
@@ -59,28 +50,39 @@ class Kohana_Publicize {
 	{
 		if ($asset = Kohana::find_file(self::PUBLIC_FOLDER, $uri, FALSE))
 		{
-			$public_asset = DOCROOT.$uri;
-			
-			if ( ! is_file($public_asset))
-			{
-				$public_asset_dir = dirname($public_asset);
-				
-				if ( ! is_dir($public_asset_dir))
-				{
-					mkdir($public_asset_dir, NULL, TRUE);
-				}
-			
-				touch($public_asset);
-			}
-			
-			file_put_contents($public_asset, file_get_contents($asset));
-			
 			return array(
 				'controller' => 'publicize',
-				'action'     => 'redirect',
+				'action'     => 'copy',
+				'asset'      => $asset,
 				'uri'        => $uri,
 			);
 		}
+	}
+	
+	/**
+	 * Copying functionality.
+	 *
+	 * @param   string  The URI
+	 * @param   string  Full path to asset
+	 * @return  void
+	 */
+	public static function copy_to_docroot($uri, $asset)
+	{
+		$public_asset = DOCROOT.$uri;
+		
+		if ( ! is_file($public_asset))
+		{
+			$public_asset_dir = dirname($public_asset);
+			
+			if ( ! is_dir($public_asset_dir))
+			{
+				mkdir($public_asset_dir, NULL, TRUE);
+			}
+		
+			touch($public_asset);
+		}
+		
+		file_put_contents($public_asset, file_get_contents($asset));
 	}
 
 }
