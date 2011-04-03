@@ -62,27 +62,21 @@ class Kohana_Publicize {
 	/**
 	 * Copying functionality.
 	 *
-	 * @param   string  The URI
 	 * @param   string  Full path to asset
+	 * @param   string  The URI
 	 * @return  void
 	 */
-	public static function copy_to_docroot($uri, $asset)
+	public static function copy_to_docroot($asset, $uri)
 	{
 		$public_asset = DOCROOT.$uri;
+		$public_asset_dir = dirname($public_asset);
 		
-		if ( ! is_file($public_asset))
+		if ( ! is_dir($public_asset_dir))
 		{
-			$public_asset_dir = dirname($public_asset);
-			
-			if ( ! is_dir($public_asset_dir))
-			{
-				mkdir($public_asset_dir, NULL, TRUE);
-			}
-		
-			touch($public_asset);
+			mkdir($public_asset_dir, NULL, TRUE);
 		}
 		
-		file_put_contents($public_asset, file_get_contents($asset));
+		copy($asset, $public_asset);
 	}
 
 }
