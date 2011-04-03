@@ -22,14 +22,18 @@ class Kohana_Controller_Publicize extends Controller {
 	{
 		$asset = $this->request->param('asset');
 	
-		if (Kohana::$environment !== Kohana::DEVELOPMENT)
+		if (Publicize::should_copy_to_docroot())
 		{
 			$uri = $this->request->param('uri');
 			
 			// Copy and redirect
 			Publicize::copy_to_docroot($asset, $uri);
-			$this->request->redirect($uri);
+			//$this->request->redirect($uri);
 		}
+		
+		// Send last modified headers so browsers have a chance
+		$this->response->headers('Last-Modified', 
+			date(DATE_RFC1123, filemtime($asset)));
 		
 		// Show live copy
 		$this->response->send_file($asset);

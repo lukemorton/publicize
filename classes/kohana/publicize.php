@@ -16,13 +16,35 @@ class Kohana_Publicize {
 	const PUBLIC_FOLDER = 'public';
 
 	/**
+	 * Should we copy to docroot? We should if not in the
+	 * development environment.
+	 *
+	 * @return  boolean
+	 */
+	public static function should_copy_to_docroot()
+	{
+		return Kohana::$environment !== Kohana::DEVELOPMENT;
+	}
+	
+	/**
+	 * Should we set route? We should if not in the
+	 * production environment.
+	 *
+	 * @return  boolean
+	 */
+	public static function should_set_route()
+	{
+		return Kohana::$environment !== Kohana::PRODUCTION;
+	}
+	
+/**
 	 * Sets route if not in production.
 	 *
 	 * @return  void
 	 */
 	public static function set_route()
 	{
-		if (Kohana::$environment !== Kohana::PRODUCTION)
+		if (self::should_set_route())
 		{
 			self::_set_route();
 		}
