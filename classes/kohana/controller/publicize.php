@@ -20,13 +20,14 @@ class Kohana_Controller_Publicize extends Controller {
 	 */
 	public function action_copy()
 	{
-		$uri = $this->request->param('uri');
 		$asset = $this->request->param('asset');
 	
 		if (Kohana::$environment !== Kohana::DEVELOPMENT)
 		{
+			$uri = $this->request->param('uri');
+			
 			// Copy and redirect
-			Publicize::copy_to_docroot($uri, $asset);
+			Publicize::copy_to_docroot($asset, $uri);
 			$this->request->redirect($uri);
 		}
 		
