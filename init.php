@@ -1,4 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-// Set route if not in production
-Publicize::set_route();
+if (Publicize::should_set_route())
+{
+	// Set route
+	Publicize::set_route();
+}

@@ -37,30 +37,16 @@ class Kohana_Publicize {
 		return Kohana::$environment !== Kohana::PRODUCTION;
 	}
 	
-/**
-	 * Sets route if not in production.
+	/**
+	 * Set route functionality.
 	 *
 	 * @return  void
 	 */
 	public static function set_route()
 	{
-		if (self::should_set_route())
-		{
-			self::_set_route();
-		}
-	}
-	
-	/**
-	 * Set route functionality.
-	 *
-	 * @return  void
-	 * @access  private
-	 */
-	private static function _set_route()
-	{
 		Route::set('Publicize', array('Publicize', 'route_callback'));
 	}
-
+	
 	/**
 	 * Route callback sends request to [Controller_Publicize].
 	 *
