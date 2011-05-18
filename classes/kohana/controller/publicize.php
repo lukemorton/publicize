@@ -36,7 +36,7 @@ class Kohana_Controller_Publicize extends Controller {
 			date(DATE_RFC1123, filemtime($asset)));
 		
 		// Show live copy
-		$this->response->send_file($asset);
+		$this->response->send_file($asset, NULL, array('inline' => TRUE));
 	}
 	
 }
