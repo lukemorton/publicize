@@ -25,7 +25,7 @@ class Kohana_Publicize {
 	{
 		return Kohana::$environment !== Kohana::DEVELOPMENT;
 	}
-	
+
 	/**
 	 * Should we set route? We should if not in the
 	 * production environment.
@@ -36,7 +36,7 @@ class Kohana_Publicize {
 	{
 		return Kohana::$environment !== Kohana::PRODUCTION;
 	}
-	
+
 	/**
 	 * Set route functionality.
 	 *
@@ -46,7 +46,7 @@ class Kohana_Publicize {
 	{
 		Route::set('Publicize', array('Publicize', 'route_callback'));
 	}
-	
+
 	/**
 	 * Route callback sends request to [Controller_Publicize].
 	 *
@@ -66,7 +66,7 @@ class Kohana_Publicize {
 			);
 		}
 	}
-	
+
 	/**
 	 * Copying functionality.
 	 *
@@ -78,12 +78,12 @@ class Kohana_Publicize {
 	{
 		$public_asset = DOCROOT.$uri;
 		$public_asset_dir = dirname($public_asset);
-		
+
 		if ( ! is_dir($public_asset_dir))
 		{
-			mkdir($public_asset_dir, NULL, TRUE);
+			mkdir($public_asset_dir, 0777, TRUE);
 		}
-		
+
 		copy($asset, $public_asset);
 	}
 
