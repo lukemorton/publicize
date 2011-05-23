@@ -49,4 +49,4 @@ and contributors ^__^ Thank you!!
 
 Licensed under [MIT][].
 
-[MIT]: http://creativecommons.org/licenses/MIT/]
+[MIT]: http://opensource.org/licenses/mit-license.php]
