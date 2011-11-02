@@ -6,6 +6,11 @@ are required? Publicize is a tiny module that enables your
 modules to contain static content such as .css and .js files
 inside a folder called `public`.
 
+## Requires
+
+ - PHP 5.3 +
+ - Kohana 3.2 + 
+
 ## Environment
 
 Dependant on your `Kohana::$environment`, Publicize will act in
@@ -34,11 +39,6 @@ This module started as a [gist][].
 
 [gist]: https://gist.github.com/899531
 
-## Requires
-
- - PHP 5.3 +
- - Kohana 3.1 +
- 
 ## Author
 
 Luke Morton a.k.a. DrPheltRight
