@@ -21,6 +21,14 @@ class Kohana_Controller_Publicize extends Controller {
 	public function action_copy()
 	{
 		$asset = $this->request->param('asset');
+		$last_modified = date(DATE_RFC1123, filemtime($asset));
+		
+		if ($last_modified === $this->request->headers('if-modified-since'))
+		{
+			// Speed up the request by sending not modified
+			$this->response->status(304);
+			return;
+		}
 	
 		if (Publicize::should_copy_to_docroot())
 		{
@@ -35,7 +43,7 @@ class Kohana_Controller_Publicize extends Controller {
 		$this->response->headers(array(
 			'content-type'   => File::mime_by_ext($extension),
 			'Content-Length' => (string) filesize($asset),
-			'Last-Modified'  => date(DATE_RFC1123, filemtime($asset)),
+			'Last-Modified'  => $last_modified,
 		));
 
 		$this->response->body(file_get_contents($asset));
